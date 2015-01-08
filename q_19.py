@@ -1,34 +1,23 @@
-given = """75
-95 64
-17 47 82
-18 35 87 10
-20 04 82 47 65
-19 01 23 75 03 34
-88 02 77 73 07 63 67
-99 65 04 28 06 16 70 92
-41 41 26 56 83 40 80 70 33
-41 48 72 33 47 32 37 16 94 29
-53 71 44 65 25 43 91 52 97 51 14
-70 11 33 28 77 73 17 78 39 68 17 57
-91 71 52 38 17 14 91 43 58 50 27 29 48
-63 66 04 68 89 53 67 30 73 16 69 87 40 31
-04 62 98 27 23 09 70 98 73 93 38 53 60 04 23"""
-given=str.split(given,'\n')
-given = [i.split(' ') for i in given]
-given = [[int(y) for y in x] for x in given]
+days_in_month = [31]*13
+days_in_month[9]=days_in_month[4]=days_in_month[6]=days_in_month[11]= 30
+days_in_month[2]= 28
+print(days_in_month)
+current_date = [1900,1,1,1]
+sundays_on_first = 0
+while current_date[0]<2001:
+    print(current_date)
+    if current_date[2] == 1 and current_date[3] == 7 and current_date[0]>=1901 and current_date[0]<=2000: # 7 is sunday
+        sundays_on_first += 1
+        print("DING")
 
-
-def combine_segment(given,row,index):
-    if(given[row+1][index] > given[row+1][index+1]):
-        given[row][index]= given[row][index] + given[row+1][index]
+    current_date[3] = current_date[3] % 7 + 1 # add day
+    if (current_date[0]%100!=0 or current_date[0]%400==0) and current_date[0]%4==0 and current_date[1]==2 and current_date[2]==28:
+        current_date[2] = 0 # if leap year (set to 0 instead of 29 for %)
     else:
-        given[row][index]= given[row][index] + given[row+1][index+1]
-    return given
+        current_date[2] = current_date[2] % days_in_month[current_date[1]] + 1
+        if current_date[2] == 1:
+            current_date[1] = current_date[1] % 12 + 1
+            if current_date[1] == 1:
+                current_date[0] += 1
 
-for i in range(len(given)-2,-1,-1):
-    for j in range(0,len(given[i])):
-        print(i,j)
-        given = combine_segment(given,i,j)
-
-print (given[0])
-
+print(sundays_on_first)
