@@ -30,5 +30,5 @@ for i in range(len(given)-2,-1,-1):
         print(i,j)
         given = combine_segment(given,i,j)
 
-print (given)
+print (given[0])
 
