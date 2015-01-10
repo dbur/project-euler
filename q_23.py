@@ -19,7 +19,6 @@ for i in range(2,top_range):
     if is_abundant(i):
         abundant_nums.append(i)
     the_answer += i
-    print(i)
 
 remove_these = set()
 for i in range(0,len(abundant_nums)):
@@ -28,7 +27,6 @@ for i in range(0,len(abundant_nums)):
             remove_these.add(abundant_nums[i]+abundant_nums[j])
         else:
             break
-        print(i,j)
 
 
 print(the_answer)
