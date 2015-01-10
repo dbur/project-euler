@@ -14,7 +14,8 @@ def is_abundant(the_num):
 
 abundant_nums = []
 the_answer = 1
-for i in range(2,28125):
+top_range = 28124
+for i in range(2,top_range):
     if is_abundant(i):
         abundant_nums.append(i)
     the_answer += i
@@ -23,11 +24,13 @@ for i in range(2,28125):
 remove_these = set()
 for i in range(0,len(abundant_nums)):
     for j in range(i,len(abundant_nums)):
-        remove_these.add(abundant_nums[i]+abundant_nums[j])
+        if(abundant_nums[i]+abundant_nums[j]<top_range):
+            remove_these.add(abundant_nums[i]+abundant_nums[j])
+        else:
+            break
         print(i,j)
+
 
 print(the_answer)
 print(sum(remove_these))
 print(the_answer-sum(remove_these))
-
-
