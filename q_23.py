@@ -12,27 +12,22 @@ def is_abundant(the_num):
                 return 1
     return 0
 
-sum_of_abundant_nums = []
 abundant_nums = []
 the_answer = 1
-next_sum_to_check=0
 for i in range(2,28125):
     if is_abundant(i):
         abundant_nums.append(i)
-        for a in range(0,len(abundant_nums)):
-            sum_of_abundant_nums.append(i+abundant_nums[a])
-        sum_of_abundant_nums = sorted(sum_of_abundant_nums)
-    if abundant_nums == []:
-        the_answer += i
-        continue
-    if i == sum_of_abundant_nums[next_sum_to_check]:
-        while i==sum_of_abundant_nums[next_sum_to_check]:
-            next_sum_to_check+=1
-        continue
     the_answer += i
     print(i)
 
+remove_these = set()
+for i in range(0,len(abundant_nums)):
+    for j in range(i,len(abundant_nums)):
+        remove_these.add(abundant_nums[i]+abundant_nums[j])
+        print(i,j)
+
 print(the_answer)
-print(abundant_nums[0:10])
+print(sum(remove_these))
+print(the_answer-sum(remove_these))
 
 
